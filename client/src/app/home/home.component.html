@@ -1,0 +1,33 @@
+
+<div class="container">
+  <div *ngIf="!registerMode" class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+      <p>
+        click here to register
+       </p>
+       <button class="btn btn-outline-success"  (click)="registerToggle()">Register</button>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+
+   </div>
+   <div *ngIf="registerMode" class="row">
+    <!-- <div class="col-md-4">
+
+    </div> -->
+    <div class="col-md-12">
+
+       <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+
+
+    </div>
+    <!-- <div class="col-md-4">
+
+    </div> -->
+
+   </div>
+</div>
