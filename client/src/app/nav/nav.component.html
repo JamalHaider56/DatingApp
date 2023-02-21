@@ -2,20 +2,27 @@
     <div class="container-fluid">
 
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul *ngIf="currentUser$ | async" class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">DatingApp</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Matches</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">List</a>
-          </li>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <ng-container *ngIf="currentUser$ | async" >
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="/"  routerLinkActive="active">DatingApp</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" routerLink="/lists" routerLinkActive="active">List</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" routerLink="/messages" routerLinkActive="active">Messages</a>
+            </li>
+          </ng-container>
+
         </ul>
         <form #loginForm = "ngForm" class="d-flex" role="search" (ngSubmit)="login()" autocomplete="off">
           <input *ngIf="(currentUser$ | async) === null" name = "username" [(ngModel)]="model.username" class="form-control me-2" type="text" placeholder="Username" aria-label="Search">
           <input *ngIf="(currentUser$ | async) === null" name = "password" [(ngModel)]="model.password" class="form-control me-2" type="password" placeholder="Password" aria-label="Search">
+          <h3 style="color: white;" *ngIf="(currentUser$ | async) as user">welcome to {{user.username | titlecase}}</h3>
           <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
           <button class="btn btn-outline-success" *ngIf="(currentUser$ | async) === null" type="submit">Login</button>
           <button class="btn btn-outline-success" *ngIf="currentUser$ | async" (click)="logout()" type="submit">Logout</button>
